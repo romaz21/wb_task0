@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Go Web Form Example</title>
+</head>
+<body>
+    <form method="post" action="/">
+        <label for="inputText">order_uid:</label>
+        <input type="text" id="inputText" name="inputText" required>
+        <button type="submit">Find</button>
+    </form>
+    {{ if .Order }}
+        <p>Order: {{ .Order }}</p>
+    {{ end }}
+</body>
+</html>
