@@ -60,10 +60,8 @@ func (c *Cache) getDataFromDb() ([]db.Order, error) {
 		if err := rows.Scan(&order.OrderUID, &order.TrackNumber, &order.Entry, &order.Locale, &order.InternalSignature, &order.CustomerID, &order.DeliveryService, &order.ShardKey, &order.SmID, &order.DateCreated, &order.OofShard); err != nil {
 			return nil, err
 		}
-		//fmt.Printf(string(result) + "\n")
 		results = append(results, order)
 	}
-
 	return results, nil
 
 }
@@ -79,7 +77,6 @@ func (c *Cache) Get(key string) (string, bool) {
 func (c *Cache) Set(key string, value string) {
 	c.mu.Lock()
 	defer c.mu.Unlock()
-
 	c.data[key] = value
 }
 

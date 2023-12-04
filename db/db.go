@@ -4,7 +4,6 @@ import (
 	"database/sql"
 	"log"
 	"fmt"
-
 	_ "github.com/lib/pq"
 )
 
@@ -15,19 +14,14 @@ const (
 	password = "1"
 )
 
-
-
 func Connect_db() *sql.DB{
 	connStr := fmt.Sprintf("host=%s port=%d user=%s password=%s sslmode=disable", host, port, user, password)
 	
-	// Создание подключения к базе данных
 	db, err := sql.Open("postgres", connStr)
 	if err != nil {
 		fmt.Println("Unable to connect to the database:", err)
 	}
-	//defer db.Close()
 
-	// Проверка подключения
 	err = db.Ping()
 	if err != nil {
 		fmt.Println("Error pinging the database:", err)
@@ -36,12 +30,6 @@ func Connect_db() *sql.DB{
 }
 
 func Write_db(db *sql.DB, order Order) {
-	// Замените параметры подключения на ваши
-	
-
-	// Пример вызова функции записи в базу данных
-	
-
 	err := insert(db, order)
 	if err != nil {
 		fmt.Println("Error inserting order:", err)
@@ -111,15 +99,11 @@ func insert(db *sql.DB, order Order) error {
 			log.Fatal(err)	
 		}
 	}
-
-	
-
 	fmt.Printf("Inserted data: Delivery ID=%d, Payment ID=%d, Order ID=%d\n", deliveryID, paymentID, orderID)
 	return nil
 }
 
 func QueryId(db *sql.DB, id string) (*sql.Rows, error) {
-	// Выполнение запроса к базе данных
 	rows, err := db.Query("SELECT order_uid, track_number, payment_id FROM orders WHERE id = $1", id)
 	if err != nil {
 		return nil, err

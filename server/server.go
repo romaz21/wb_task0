@@ -1,10 +1,8 @@
 package server
 
 import (
-	//"fmt"
 	"database/sql"
 	"example.com/wb/cache"
-	//"example.com/wb/db"
 	"log"
 	"html/template"
 	"net/http"
@@ -12,12 +10,6 @@ import (
 type AppHandler struct {
     DB *sql.DB
     c *cache.Cache
-}
-
-type Result struct {
-	Column1 string
-	Column2 string
-	Column3 string
 }
 
 type PageData struct {
@@ -46,7 +38,6 @@ func (a *AppHandler) homeHandler(w http.ResponseWriter, r *http.Request) {
 func StartHttpServer(db *sql.DB, c *cache.Cache) {
 	appHandler := &AppHandler{DB: db, c: c}
 	http.HandleFunc("/", appHandler.homeHandler)
-
 	log.Fatal(http.ListenAndServe(":8080", nil))
 }
 
